@@ -1729,11 +1729,11 @@ do_advanced_menu() {
   FUN=$(whiptail --title "Odroid-XU4 Software Configuration Tool (odroid-config)" --menu "Advanced Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Back --ok-button Select \
     "A1 Expand Filesystem" "Ensures that all of the SD card storage is available to the OS" \
     "A2 Overscan" "You may need to configure overscan if black bars are present on display" \
-   # "A3 Memory Split" "Change the amount of memory made available to the GPU" \
+   "A3 Memory Split" "Change the amount of memory made available to the GPU" \
     "A4 Audio" "Force audio out through HDMI or 3.5mm jack" \
     "A5 Resolution" "Set a specific screen resolution" \
-   # "A6 Pixel Doubling" "Enable/Disable 2x2 pixel mapping" \
-   # "A7 GL Driver" "Enable/Disable experimental desktop GL driver" \
+    "A6 Pixel Doubling" "Enable/Disable 2x2 pixel mapping" \
+    "A7 GL Driver" "Enable/Disable experimental desktop GL driver" \
     3>&1 1>&2 2>&3)
   RET=$?
   if [ $RET -eq 1 ]; then
@@ -1742,11 +1742,11 @@ do_advanced_menu() {
     case "$FUN" in
       A1\ *) do_expand_rootfs ;;
       A2\ *) do_overscan ;;
-     # A3\ *) do_memory_split ;;
+     A3\ *) do_memory_split ;;
       A4\ *) do_audio ;;
-    #  A5\ *) do_resolution ;;
-     # A6\ *) do_pixdub ;;
-    #  A7\ *) do_gldriver ;;
+     A5\ *) do_resolution ;;
+     A6\ *) do_pixdub ;;
+    A7\ *) do_gldriver ;;
       *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
     esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
   fi
@@ -1811,9 +1811,9 @@ if [ "$INTERACTIVE" = True ]; then
         "3 Boot Options" "Configure options for start-up" \
         "4 Localisation Options" "Set up language and regional settings to match your location" \
         "5 Interfacing Options" "Configure connections to peripherals" \
-       # "6 Overclock" "Configure overclocking for your Pi" \
+       "6 Overclock" "Configure overclocking for your Pi" \
         "7 Advanced Options" "Configure advanced settings" \
-       # "8 Update" "Update this tool to the latest version" \
+        "8 Update" "Update this tool to the latest version" \
         "9 About odroid-config" "Information about this configuration tool" \
         3>&1 1>&2 2>&3)
     else
@@ -1823,8 +1823,8 @@ if [ "$INTERACTIVE" = True ]; then
         "3 Boot Options" "Configure options for start-up" \
         "4 Localisation Options" "Set up language and regional settings to match your location" \
         "5 SSH" "Enable/Disable remote command line access to your PC using SSH" \
-        #"6 Pixel Doubling" "Enable/Disable 2x2 pixel mapping" \
-        #"8 Update" "Update this tool to the latest version" \
+       "6 Pixel Doubling" "Enable/Disable 2x2 pixel mapping" \
+        "8 Update" "Update this tool to the latest version" \
         "9 About odroid-config" "Information about this configuration tool" \
         3>&1 1>&2 2>&3)
     fi
@@ -1839,9 +1839,9 @@ if [ "$INTERACTIVE" = True ]; then
           3\ *) do_boot_menu ;;
           4\ *) do_internationalisation_menu ;;
           5\ *) do_interface_menu ;;
-         # 6\ *) do_overclock ;;
+          6\ *) do_overclock ;;
           7\ *) do_advanced_menu ;;
-         # 8\ *) do_update ;;
+          8\ *) do_update ;;
           9\ *) do_about ;;
           *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
         esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
@@ -1852,8 +1852,8 @@ if [ "$INTERACTIVE" = True ]; then
           3\ *) do_boot_menu ;;
           4\ *) do_internationalisation_menu ;;
           5\ *) do_ssh ;;
-        #  6\ *) do_pixdub ;;
-         # 8\ *) do_update ;;
+          6\ *) do_pixdub ;;
+          8\ *) do_update ;;
           9\ *) do_about ;;
           *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
         esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
