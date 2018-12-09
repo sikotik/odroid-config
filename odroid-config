@@ -18,7 +18,7 @@ is_pi () {
 }
 
 if is_pi ; then
-  CMDLINE=/boot/cmdline.txt
+  CMDLINE=media/boot/boot.ini
 else
   CMDLINE=/proc/cmdline
 fi
@@ -85,7 +85,7 @@ calc_wt_size() {
 do_about() {
   whiptail --msgbox "\
 This tool provides a straight-forward way of doing initial
-configuration of the Raspberry Pi. Although it can be run
+configuration of the Odroid-XU4. Although it can be run
 at any time, some of the options may have difficulties if
 you have heavily customised your installation.\
 " 20 70 1
@@ -264,7 +264,7 @@ do_overscan() {
       CURRENT=1
   fi
   if [ "$INTERACTIVE" = True ]; then
-    whiptail --yesno "Would you like to enable compensation for displays with overscan?" $DEFAULT 20 60 2
+    whiptail --yesno "Sorry, but the Mali GPU hardware does not support overscan compensation. Check your Television or Monitor settings for overscan settings" $DEFAULT 20 60 2
     RET=$?
   else
     RET=$1
