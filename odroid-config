@@ -1,6 +1,6 @@
 #!/bin/sh
 # Part of raspi-config https://github.com/RPi-Distro/raspi-config
-#
+#Adapted for the Odroid XU4
 # See LICENSE file for copyright and license details
 
 INTERACTIVE=True
@@ -246,48 +246,6 @@ if not found then
 end
 EOF
 }
-
-get_overscan() {
-  OVS=$(get_config_var disable_overscan $CONFIG)
-  if [ $OVS -eq 1 ]; then
-    echo 1
-  else
-    echo 0
-  fi
-}
-
-do_overscan() {
-  DEFAULT=--defaultno
-  CURRENT=0
-  if [ $(get_overscan) -eq 0 ]; then
-      DEFAULT=
-      CURRENT=1
-  fi
-  if [ "$INTERACTIVE" = True ]; then
-    whiptail --yesno "Sorry, but the Mali GPU hardware does not support overscan compensation. Check your Television or Monitor settings for overscan settings" $DEFAULT 20 60 2
-    RET=$?
-  else
-    RET=$1
-  fi
-  if [ $RET -eq $CURRENT ]; then
-    ASK_TO_REBOOT=1
-  fi
-  if [ $RET -eq 0 ] ; then
-    set_config_var disable_overscan 0 $CONFIG
-    STATUS=enabled
-  elif [ $RET -eq 1 ]; then
-    sed $CONFIG -i -e "s/^overscan_/#overscan_/"
-    set_config_var disable_overscan 1 $CONFIG
-    STATUS=disabled
-  else
-    return $RET
-  fi
-  if [ "$INTERACTIVE" = True ]; then
-    whiptail --msgbox "Display overscan compensation is $STATUS" 20 60 1
-  fi
-}
-
-
 
 do_change_pass() {
   whiptail --msgbox "You will now be asked to enter a new password for the $SUDO_USER user" 20 60 1
