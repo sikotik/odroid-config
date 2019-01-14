@@ -660,7 +660,7 @@ do_interface_menu() {
   fi
 }
 
-do_advanced_menu() {
+do_resize_menu() {
   FUN=$(whiptail --title "Odroid-XU4 Software Configuration Tool (odroid-config)" --menu "Advanced Options" $WT_HEIGHT $WT_WIDTH $WT_MENU_HEIGHT --cancel-button Back --ok-button Select \
     "A1 Expand Filesystem" "Ensures that all of the SD card storage is available to the OS" \
     3>&1 1>&2 2>&3)
@@ -730,7 +730,7 @@ if [ "$INTERACTIVE" = True ]; then
         "3 Boot Options" "Configure options for start-up" \
         "4 Localisation Options" "Set up language and regional settings to match your location" \
         "5 Interfacing Options" "Configure connections to peripherals" \
-        "6 Advanced Options" "Configure advanced settings" \
+        "6 Resize Filesystem" "Ensures that all of the SD card storage is available to the OS" \
         "7 About odroid-config" "Information about this configuration tool" \
         3>&1 1>&2 2>&3)
     else
@@ -754,7 +754,7 @@ if [ "$INTERACTIVE" = True ]; then
           3\ *) do_boot_menu ;;
           4\ *) do_internationalisation_menu ;;
           5\ *) do_interface_menu ;;
-          6\ *) do_advanced_menu ;;
+          6\ *) do_expand_rootfs ;;
           7\ *) do_about ;;
           *) whiptail --msgbox "Programmer error: unrecognized option" 20 60 1 ;;
         esac || whiptail --msgbox "There was an error running option $FUN" 20 60 1
